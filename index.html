@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Star Wars | Hang Man</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+    <script src="assets/javascript/game.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Gothic+A1:700" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+
+    <!-- this places a target for our scrolling css text to move to -->
+
+    <div class="scrolltarget">
+
+    <!-- this places the text to be scrolled to target -->
+
+        <div class="scrolltext">
+
+            <p>In a galaxy, far, far, away..... you have to guess all of these words from the Star Wars movies! Press the corresponding key on your keyboard to make a guess. For each word, you will have eight incorrect guesses before the game ends. If you can correctly guess all five, you will win the game! Good luck and may the force be with you!</p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- start of normal bootstrap for rest of site -->
+    <div class="container">
+
+        <!-- first row, containing logo and title of game -->
+        <div class="row">
+
+            <div class="col-md-6 mx-auto">
+
+                <img src="assets/images/logo.png" alt="star wars" class="swlogo">
+
+                <h1 class="title">THE LAST HANGMAN</h1>
+
+            </div>
+
+        </div>
+
+        <!-- second row, showing the letter spaces for the word -->
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="card bg-secondary">
+
+                    <h3 class="card-title mx-auto text-light">Word to Guess:</h3>
+
+                    <div class="card-text mx-auto text-light" id="target">
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <div class="card bg-secondary">
+
+                    <h4 class="card-title mx-auto text-light">Last Guess:</h4>
+                    <h5 class="card-text mx-auto text-light pb-1" id="guess">E</h5>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- row containing elements for the incorrect letters -->
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="card bg-secondary mt-3">
+
+                        <h3 class="card-title mx-auto text-light">Incorrect Letters:</h3>
+
+                        <div class="card-text mx-auto text-light">
+
+                            _ _ _ _ _ _ _   _ _ _ _ _ 
+
+                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- row containing elements for guesses remaining -->
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="card bg-secondary mt-3">
+
+                    <h3 class="card-title mx-auto text-light">Guesses Remaining:</h3>
+
+                    <h4 class="card-text mx-auto text-light">8</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- row containing elements for number of correct -->
+
+        <div class="row">
+
+                <div class="col-md-4">
+                    
+                    <div class="card bg-secondary mt-3">
+
+                        <h3 class="card-title mx-auto text-light">Score:</h3>
+
+                        <h4 class="card-text mx-auto text-light">0</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+     </div>
+    
+</body>
+</html>

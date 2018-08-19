@@ -1,0 +1,48 @@
+.title {
+    font-family: 'Gothic A1', sans-serif;
+    color: white;
+}
+
+body {
+
+    background-image: url("../images/background-stars.jpg");
+
+
+}
+
+.swlogo {
+    width: 400px;
+    height: 171px;
+}
+
+.scrolltarget {
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    right: 280px;
+    top: 220px;
+}
+
+.scrolltext {
+    font-family: 'Gothic A1', sans-serif;
+    color: yellow;
+    line-height: 2;
+    text-align: justify;
+    position: relative;
+    animation-name: swtext;
+    animation-duration: 9s;
+    animation-iteration-count: 1;
+    top: 400px;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes swtext {
+    from {top: 320px;}
+    to {top: 10px;}
+}
+
+.spacers {
+    display: inline-block;
+    width: 15px;
+}
