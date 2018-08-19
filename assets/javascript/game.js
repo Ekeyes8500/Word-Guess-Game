@@ -1,29 +1,37 @@
 
 //VARIABLES
 
-    var word1 = ["L", "I", "G", "H", "T", "S", "A", "B", "E", "R"];
+var word1 = ["L", "I", "G", "H", "T", "S", "A", "B", "E", "R"];
 
-    var word2 = ["S", "K", "Y", "W", "A", "L", "K", "E", "R"];
+var word2 = ["S", "K", "Y", "W", "A", "L", "K", "E", "R"];
 
-    var word3 = ["V", "A", "D", "E", "R"];
+var word3 = ["V", "A", "D", "E", "R"];
 
-    var word4 = ["C", "A", "N", "T", "I", "N", "A"];
+var word4 = ["C", "A", "N", "T", "I", "N", "A"];
 
-    var word5 = ["S", "P", "E", "E", "D", "E", "R"];
-    
-    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var word5 = ["S", "P", "E", "E", "D", "E", "R"];
 
-    var userScore = 0;
+var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-    var userTick = 8;
+var userScore = 0;
 
-    var scoredLetter;
+var userTick = 8;
 
-    var userGuess;
+var scoredLetter;
 
-    var stage = 0;
+var userGuess;
 
-    var spaceFinder;
+var stage = 0;
+
+var spaceFinder;
+
+var gotPoints;
+
+var pressedKeys = [];
+
+var duplicateKey;
+
+var lives;
 
 
 
@@ -31,11 +39,15 @@
 //FUNCTIONS
 
 
-    //this checks the user's input against the stored array
+//this checks the user's input against the stored array
 
-    function guessCheck(x) {
+function guessCheck(x) {
+
+
 
         spaceFinder = 0;
+
+        gotPoints = false;
 
 
         //this makes the number of checks against the word the number of letters in it
@@ -46,11 +58,17 @@
 
         for (i = 0; i < checks; i++) {
 
+            //Allows the user input for correct answers to align
+
             spaceFinder = spaceFinder + 1;
 
+
+
             //compares userGuess to the array containing word
-            
-            if (userGuess === x[i]) {
+
+            if (userGuess === x[i] && duplicateKey === false) {
+
+                gotPoints = true;
 
                 //tracks stage, which allows the game to move forward
 
@@ -67,140 +85,204 @@
 
         }
 
-        if (stage === 10) {
+        if (stage === 10 && gotPoints === true) {
 
             userScore = userScore + 1;
 
-            document.getElementById("score").innerHTML = userScore;
 
-            document.getElementById("target").innerHTML = "";
+            spacePlacement(word2);
 
-            spacePlacement(word2);   
+
 
         }
 
-        else if (stage === 19) {
+        else if (stage === 19 && gotPoints === true) {
 
             userScore = userScore + 1;
 
-            document.getElementById("score").innerHTML = userScore;
-
-            document.getElementById("target").innerHTML = "";  
 
             spacePlacement(word3);
-            
-        } 
+        }
 
-        else if (stage === 24) {
+        else if (stage === 24 && gotPoints === true) {
 
             userScore = userScore + 1;
-
-            document.getElementById("score").innerHTML = userScore;
-
-            document.getElementById("target").innerHTML = "";  
 
             spacePlacement(word4);
-            
-        } 
 
-        else if (stage === 31) {
+
+        }
+
+        else if (stage === 31 && gotPoints === true) {
 
             userScore = userScore + 1;
-
-             document.getElementById("score").innerHTML = userScore;
-
-            document.getElementById("target").innerHTML = "";  
 
             spacePlacement(word5);
 
-        } 
 
-    }
+        }
 
-    function spacePlacement(x) {
+        //Game ends at 38
 
+        else if (stage === 38) {
 
-        var wordSpaces = x.length;
+            document.getElementById("righttext").innerHTML = "YOU WIN!";
 
-        spaceFinder = 0;
+        }
 
-        for (i = 0; i < wordSpaces; i++) {
+        else if (gotPoints === false && duplicateKey === false) {
 
-            spaceFinder = spaceFinder + 1;
+            lives = lives - 1;
+
+            userTick = lives;
+
+            console.log(userTick)
+            console.log("I have run!")
+
+            document.getElementById("lives").innerHTML = userTick;
 
             var node = document.createElement("DIV");
 
             node.className = "spacers";
+    
 
-            node.setAttribute("id", spaceFinder);
-
-            var t = document.createTextNode("_");
-
-            var s = document.createTextNode(" ");
-
-            node.appendChild(t);
-
+            var s = document.createTextNode(userGuess);
+    
+    
             node.appendChild(s);
+    
+            document.getElementById("misses").appendChild(node);
 
-            document.getElementById("target").appendChild(node);
+            if (userTick === 0) {
 
+                document.getElementById("righttext").innerHTML = "I FIND YOUR LACK OF FAITH DISTURBING, YOU LOSE!";
+                stage = 999;
+            }
         }
+
+}
+
+//this function creates the blank space for the words on the left
+
+function spacePlacement(x) {
+
+    lives = 8;
+
+    userTick = 8;
+
+    document.getElementById("lives").innerHTML = userTick;
+
+    pressedKeys = [];
+
+    document.getElementById("score").innerHTML = userScore;
+
+    document.getElementById("target").innerHTML = "";
+
+    document.getElementById("misses").innerHTML = "";
+
+    var wordSpaces = x.length;
+
+    spaceFinder = 0;
+
+    for (i = 0; i < wordSpaces; i++) {
+
+        //tracks what space we are on 
+
+        spaceFinder = spaceFinder + 1;
+
+        var node = document.createElement("DIV");
+
+        node.className = "spacers";
+
+        node.setAttribute("id", spaceFinder);
+
+        var t = document.createTextNode("_");
+
+        var s = document.createTextNode(" ");
+
+        node.appendChild(t);
+
+        node.appendChild(s);
+
+        document.getElementById("target").appendChild(node);
 
     }
 
-    function stageChecker() {
+}
 
-        if (stage < 10) {
+function stageChecker() {
 
-            guessCheck(word1);
+    if (stage < 10) {
 
-        }  else if (stage >= 10 && stage < 19) {
+        guessCheck(word1);
 
-            guessCheck(word2);
+    } else if (stage >= 10 && stage < 19) {
 
-        } else if (stage >= 19 && stage < 24) {
+        guessCheck(word2);
 
-            guessCheck(word3);
+    } else if (stage >= 19 && stage < 24) {
 
-        } else if (stage >= 24 && stage < 31) {
+        guessCheck(word3);
 
-            guessCheck(word4);
+    } else if (stage >= 24 && stage < 31) {
 
-         } else if (stage >= 31) {
+        guessCheck(word4);
 
-            guessCheck(word5);
+    } else if (stage >= 31) {
 
+        guessCheck(word5);
 
-        }
 
     }
+
+}
 
 //SCRIPT
 //when window loads, first word is set up for user to play
 
- window.onload = function (event) {
+window.onload = function (event) {
 
-   spacePlacement(word1);
+    spacePlacement(word1);
 
 
     // key checker for key press event, begins main functions
 
 
-        document.onkeyup = function (event) {
+    document.onkeyup = function (event) {
 
-            //this makes the guessed letter upper case to fix with the stored array syntax
+        //this makes the guessed letter upper case to fix with the stored array syntax
 
-            userGuess = event.key.toUpperCase();
+        userGuess = event.key.toUpperCase();
 
-            //this updates the HTML to have the proper guess stored
 
-            document.getElementById("guess").innerHTML = userGuess;
+        //this updates the HTML to have the proper guess stored
+
+        document.getElementById("guess").innerHTML = userGuess;
         
-            stageChecker();
-            
+
+        duplicateKey = false;
+
+        for (i = 0; i < pressedKeys.length; i++) {
+    
+            if (userGuess === pressedKeys[i]) {
+    
+                duplicateKey = true;
+    
+            }
+    
+        }
+
+        pressedKeys.push(userGuess);
+
+        //checks state of game to clean up properly and check the correct word
+
+        stageChecker();
+
+        //pressedKeys array now stores the key that was used
 
 
-        };
+
+    };
 
 
 }
